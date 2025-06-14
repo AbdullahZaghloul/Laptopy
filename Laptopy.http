@@ -1,0 +1,6 @@
+@Laptopy_HostAddress = http://localhost:5157
+
+GET {{Laptopy_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
