@@ -1,8 +1,11 @@
 ﻿using Laptopy.DTOS.Response;
+using Laptopy.Models;
 using Laptopy.Repository.IRepository;
 using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Laptopy.Areas.Customer.Controllers
@@ -20,37 +23,27 @@ namespace Laptopy.Areas.Customer.Controllers
             _productRepository = productRepository;
         }
 
-        [HttpGet("GetProductByCategory")]
-        public async Task<IActionResult> GetProductByCategory(int CategoryId)
+        [HttpGet("Filter")]
+        public async Task<IActionResult> Filter(string? categoryName,int? minPrice,int? maxPrice ,double? Rating,int? page=1,int?pageSize =10)
         {
-            var Product = await _productRepository.GetAsync(expression: p => p.CategoryID == CategoryId, includes:[propa=>propa.ProductImages]);
-            if(Product is not null)
-            {
-                return Ok(Product.Adapt<IEnumerable<ProductResponse>>());
-            }
-            return BadRequest();
+            Expression<Func<Product, bool>>? filter = p =>
+            (string.IsNullOrEmpty(categoryName) || p.Category.Name == categoryName) &&
+            (!minPrice.HasValue || p.Price >= minPrice.Value) &&
+            (!maxPrice.HasValue || p.Price <= maxPrice.Value) &&
+            (!Rating.HasValue || p.Rating >= Rating.Value);
 
-        }
-        [HttpGet("GetProductByPrice")]
-        public async Task<IActionResult> GetProductByPrice(int minPrice, int maxPrice)
-        {
-            var products =await _productRepository.GetAsync(expression: p => p.Price >= minPrice && p.Price <= maxPrice);
-            if(products is not null)
+
+            var products = await _productRepository.GetAsync(expression: filter, includes:[p=>p.ProductImages]);
+
+            products = products.Skip((page.Value-1)*pageSize.Value).Take(pageSize.Value);
+
+            if (products is not null)
             {
                 return Ok(products.Adapt<IEnumerable<ProductResponse>>());
             }
             return BadRequest();
         }
-        [HttpGet("GetCategoryByRating")]
-        public async Task<IActionResult> GetCategoryByRating(double Rating)
-        {
-            var products = await _productRepository.GetAsync(expression: p => p.Rating == Rating, includes: [p => p.ProductImages]);
-            if(products is not null)
-            {
-                return Ok(products.Adapt<IEnumerable<ProductResponse>>());
-            }
-            return BadRequest();
-        }
+
         [HttpGet("GetProductById")]
         public async Task<IActionResult> GetProductById(int ProductId)
         {

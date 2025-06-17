@@ -72,13 +72,54 @@
     "ContainingType": "Laptopy.Areas.Identity.Controllers.AccountController",
     "Method": "ResetPassword",
     "RelativePath": "api/Account/ResetPassword",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "NewPassword",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ConfirmPassword",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Laptopy.Areas.Identity.Controllers.AccountController",
+    "Method": "SignOut",
+    "RelativePath": "api/Account/sign out",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Laptopy.Areas.Customer.Controllers.ContactUsController",
+    "Method": "ContactUs",
+    "RelativePath": "api/ContactUs/ContactUs",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "model",
-        "Type": "Laptopy.Models.ViewModels.ResetPasswordVM",
+        "Name": "contactUsRequest",
+        "Type": "Laptopy.DTOS.Request.ContactUsRequest",
         "IsRequired": true
       }
     ],
@@ -91,7 +132,18 @@
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -112,31 +164,40 @@
   },
   {
     "ContainingType": "Laptopy.Areas.Customer.Controllers.ProductController",
-    "Method": "GetCategoryByRating",
-    "RelativePath": "api/Product/GetCategoryByRating",
+    "Method": "Filter",
+    "RelativePath": "api/Product/Filter",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
+      {
+        "Name": "categoryName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "minPrice",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "maxPrice",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
       {
         "Name": "Rating",
-        "Type": "System.Double",
+        "Type": "System.Nullable\u00601[[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Laptopy.Areas.Customer.Controllers.ProductController",
-    "Method": "GetProductByCategory",
-    "RelativePath": "api/Product/GetProductByCategory",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
+      },
       {
-        "Name": "CategoryId",
-        "Type": "System.Int32",
+        "Name": "page",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       }
     ],
@@ -152,27 +213,6 @@
     "Parameters": [
       {
         "Name": "ProductId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Laptopy.Areas.Customer.Controllers.ProductController",
-    "Method": "GetProductByPrice",
-    "RelativePath": "api/Product/GetProductByPrice",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "minPrice",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "maxPrice",
         "Type": "System.Int32",
         "IsRequired": false
       }

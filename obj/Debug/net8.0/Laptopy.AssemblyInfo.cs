@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Laptopy")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6275e845f186d4b90b2adfdb4af5a87bc9dbfe64")]
 [assembly: System.Reflection.AssemblyProductAttribute("Laptopy")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Laptopy")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

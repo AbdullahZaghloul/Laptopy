@@ -90,22 +90,22 @@ namespace Laptopy.Areas.Identity.Controllers
         public async Task<IActionResult> ForgetPassword(ForgetPasswordVM forgetPasswordVM)
         {
             var applicationUser = await _userManager.FindByEmailAsync(forgetPasswordVM.UserNameOrEmail);
-            if(applicationUser is null)
+            if (applicationUser is null)
             {
-                applicationUser =await _userManager.FindByNameAsync(forgetPasswordVM.UserNameOrEmail);
+                applicationUser = await _userManager.FindByNameAsync(forgetPasswordVM.UserNameOrEmail);
             }
-            if(applicationUser is not null)
+            if (applicationUser is not null)
             {
                 string token = await _userManager.GeneratePasswordResetTokenAsync(applicationUser);
-                var resetPassword = Url.Action("ResetPassword", "Account", new { area = "Identity", applicationUser.Id, token },Request.Scheme);
+                var resetPassword = Url.Action("ResetPassword", "Account", new { area = "Identity", applicationUser.Id, token , NewPassword = "2062002Date@" , ConfirmPassword = "2062002Date@" }, Request.Scheme);
                 await _emailSender.SendEmailAsync(applicationUser.Email, "Reset Password", $"<h1>Reset Password Account By Click <a href='{resetPassword}'>Here</a></h1>");
                 return Ok("the email send successfully");
             }
             return BadRequest();
         }
 
-        [HttpPost("ResetPassword")]
-        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordVM model)
+        [HttpGet("ResetPassword")]
+        public async Task<IActionResult> ResetPassword([FromQuery]ResetPasswordVM model)
         {
 
             var user = await _userManager.FindByIdAsync(model.Id);
@@ -121,6 +121,25 @@ namespace Laptopy.Areas.Identity.Controllers
             }
 
             return BadRequest(result.Errors.Select(e => e.Description));
+        }
+
+        [HttpPost("sign out")]
+        public async Task<IActionResult> SignOut()
+        {
+            try
+            {
+                if (!User.Identity.IsAuthenticated)
+                {
+                    return BadRequest( "No user is currently signed in." );
+                }
+                await signIn.SignOutAsync();
+                return Ok("sign out successfully");
+            }
+            catch (Exception ex) {
+                return BadRequest(ex.Message);
+
+            }
+            
         }
 
     }

@@ -4,6 +4,7 @@ using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Laptopy.Areas.Customer.Controllers
@@ -18,9 +19,10 @@ namespace Laptopy.Areas.Customer.Controllers
             this.productRepository = productRepository;
         }
         [HttpGet("GetAllProduct")]
-        public async Task<IActionResult> GetAllProduct()
+        public async Task<IActionResult> GetAllProduct(int? page=1 , int?pageSize = 10)
         {
             var products =await productRepository.GetAsync(includes: [productRepository=>productRepository.ProductImages]);
+            products = products.Skip((page.Value - 1) * pageSize.Value).Take(pageSize.Value);
             var productsResponse = products.Adapt<IEnumerable<ProductResponse>>();
             if(products is not null)
                 return Ok(productsResponse);

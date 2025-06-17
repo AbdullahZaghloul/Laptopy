@@ -265,3 +265,8 @@ C:\Users\NanoChip\source\repos\Laptopy\obj\Debug\net8.0\refint\Laptopy.dll
 C:\Users\NanoChip\source\repos\Laptopy\obj\Debug\net8.0\Laptopy.pdb
 C:\Users\NanoChip\source\repos\Laptopy\obj\Debug\net8.0\Laptopy.genruntimeconfig.cache
 C:\Users\NanoChip\source\repos\Laptopy\obj\Debug\net8.0\ref\Laptopy.dll
+C:\Users\NanoChip\source\repos\Laptopy\obj\Debug\net8.0\Laptopy.sourcelink.json
+C:\Users\NanoChip\source\repos\Laptopy\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\NanoChip\source\repos\Laptopy\obj\Debug\net8.0\rjimswa.dswa.cache.json
+C:\Users\NanoChip\source\repos\Laptopy\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
+C:\Users\NanoChip\source\repos\Laptopy\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
